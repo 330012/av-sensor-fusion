@@ -1,0 +1,11 @@
+data/
+outputs/
+.venv/
+.vscode/
+.claude/
+__pycache__/
+*.pyc
+.env
+*.egg-info
+dist/
+.ipynb_checkpoints
