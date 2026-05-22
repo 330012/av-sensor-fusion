@@ -1,47 +1,113 @@
-AV Sensor Fusion
-================
+# AV Sensor Fusion
+### Camera–Radar Sensor Fusion Pipeline on the nuScenes Dataset
 
-Portfolio project demonstrating camera-radar sensor fusion on the nuScenes
-mini dataset. The pipeline loads synchronized camera and radar samples,
-projects radar point clouds onto camera images, computes coverage statistics,
-and visualizes the results.
+![Camera + Radar overlay](outputs/figures/camera_radar_overlay.png)
 
-Stack
------
-- Python 3.11
-- NumPy, SciPy, pandas, matplotlib
-- OpenCV, Open3D
-- nuScenes-devkit
+Motivation
+----------
+Autonomous vehicles rely on multi-modal perception because no single sensor
+captures the full picture. This project demonstrates camera–radar fusion on the
+nuScenes mini dataset, combining complementary sensing to project radar returns
+into the camera view and quantify coverage.
 
-Project Structure
------------------
-- data/           nuScenes dataset (gitignored)
-- notebooks/      analysis notebooks
-- outputs/        generated figures and stats (gitignored)
-- scripts/        pipeline modules
-- tests/          unit tests
+Features
+--------
+- Multi-sensor data loading (camera + radar)
+- Three-stage coordinate transformation (radar → ego → camera → image)
+- End-to-end radar projection pipeline
+- Sensor coverage and range distribution analysis
+- Visualisation suite (overlays, bird's eye, histograms)
+- Scene-level statistical analysis with JSON output
+- 13 unit tests covering core math
 
-Setup
------
-1. Create and activate a Python 3.11 virtual environment.
-2. Install dependencies:
+Architecture
+------------
+```
+nuScenes Data -> Data Loader -> Coordinate Transforms -> Radar Projection -> Visualisation + Statistics
+```
 
-	pip install -r requirements.txt
+Sample Results
+--------------
+| Camera + Radar fusion overlay | Radar bird's-eye view | FOV coverage across a scene |
+| --- | --- | --- |
+| ![Camera + Radar overlay](outputs/figures/camera_radar_overlay.png) | ![Radar bird's-eye](outputs/figures/radar_birds_eye.png) | ![FOV coverage](outputs/figures/coverage_by_sample.png) |
 
-3. Install nuScenes devkit without its pinned dependencies:
+- Camera + Radar fusion overlay shows projected radar returns aligned to image pixels.
+- Radar bird's-eye view highlights the spatial distribution of detections in ego space.
+- FOV coverage across a scene visualizes the percentage of radar points landing in view.
 
-	pip install --no-deps nuscenes-devkit==1.1.11
+Installation
+------------
+```bash
+git clone https://github.com/330012/av-sensor-fusion
+cd av-sensor-fusion
+python -m venv .venv
+.venv\Scripts\activate    # Windows
+source .venv/bin/activate # macOS/Linux
+pip install -r requirements.txt
+```
 
-Dataset
--------
-Download the nuScenes mini dataset and place it under data/nuscenes/.
-The path and dataset version are configured in scripts/config.py.
+Dataset Setup
+-------------
+Download the nuScenes mini dataset and extract it to data/nuscenes/ with the
+following structure:
+
+```
+data/
+	nuscenes/
+		maps/
+		samples/
+		sweeps/
+		v1.0-mini/
+```
 
 Usage
 -----
-- Notebooks live under notebooks/.
-- The CLI entry point will be scripts/main.py (added in later phases).
+```bash
+# Run full pipeline on scene 0
+python -m scripts.main --scene-index 0 --num-frames 5
+
+# See all options
+python -m scripts.main --help
+```
+
+Project Structure
+-----------------
+```
+av-sensor-fusion/
+	data/        nuScenes dataset (gitignored)
+	notebooks/   exploratory notebooks
+	outputs/     generated figures and stats (gitignored)
+	scripts/     pipeline modules and CLI
+	tests/       unit tests
+```
+
+Running Tests
+-------------
+```bash
+pytest tests/ -v
+```
+13 tests covering coordinate transforms, radar projection, data loading, and statistics.
+
+Key Learnings
+------------
+- Sensor coordinate frames and quaternion-based transforms
+- Pinhole camera projection model
+- Cross-modal sensor alignment fundamentals
+- Statistical analysis of sensor coverage
+
+References
+----------
+- nuScenes paper: https://arxiv.org/abs/1903.11027
+- nuScenes devkit: https://github.com/nutonomy/nuscenes-devkit
+- CARIAD perception research focus
+
+Author
+------
+Gaurav Dineshbhai Khunt
+LinkedIn: https://www.linkedin.com/in/gauravkhunt
+Email: gauravkhunt110@gmail.com
 
 License
 -------
-MIT. See LICENSE.
+MIT License (see LICENSE).
