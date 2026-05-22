@@ -1,14 +1,18 @@
 # AV Sensor Fusion
 ### Camera–Radar Sensor Fusion Pipeline on the nuScenes Dataset
 
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![Tests](https://img.shields.io/badge/tests-13%20passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 ![Camera + Radar overlay](outputs/figures/camera_radar_overlay.png)
 
 Motivation
 ----------
 Autonomous vehicles rely on multi-modal perception because no single sensor
 captures the full picture. This project demonstrates camera–radar fusion on the
-nuScenes mini dataset, combining complementary sensing to project radar returns
-into the camera view and quantify coverage.
+nuScenes mini dataset, projecting radar returns into the camera view and
+quantifying coverage.
 
 Features
 --------
@@ -104,7 +108,7 @@ References
 
 Author
 ------
-Gaurav Dineshbhai Khunt
+**Gaurav Dineshbhai Khunt**
 LinkedIn: https://www.linkedin.com/in/gauravkhunt
 Email: gauravkhunt110@gmail.com
 
