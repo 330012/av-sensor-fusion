@@ -27,6 +27,9 @@ tqdm>=4.66
 pyyaml>=6.0
 requests>=2.31
 
+# Development
+pytest>=8.0
+
 # nuScenes-devkit runtime deps (devkit itself installed via --no-deps
 # because it pins matplotlib<3.6 which has no Python 3.11 wheels)
 pyquaternion>=0.9.9
