@@ -1,0 +1,39 @@
+# Core scientific stack
+# numpy pinned <2.0 for compatibility with nuscenes-devkit and open3d
+numpy>=1.24,<2.0
+scipy>=1.11
+pandas>=2.1
+matplotlib>=3.7
+
+# 3D / point clouds
+open3d>=0.18.0
+
+# Computer vision / image I/O
+opencv-python>=4.9
+pillow>=10.0
+pycocotools>=2.0.7
+
+# Machine learning utilities
+scikit-learn>=1.4
+
+# Notebook environment
+jupyter>=1.0
+jupyterlab>=4.0
+ipykernel>=6.29
+ipywidgets>=8.1
+
+# Utilities
+tqdm>=4.66
+pyyaml>=6.0
+requests>=2.31
+
+# nuScenes-devkit runtime deps (devkit itself installed via --no-deps
+# because it pins matplotlib<3.6 which has no Python 3.11 wheels)
+pyquaternion>=0.9.9
+shapely>=2.0
+descartes>=1.1.0
+fire>=0.6.0
+cachetools>=5.3
+
+# nuScenes dataset SDK -- installed separately with --no-deps:
+#   pip install --no-deps nuscenes-devkit==1.1.11
